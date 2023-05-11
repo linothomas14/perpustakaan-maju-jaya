@@ -1,21 +1,35 @@
 <h4 class="center">List Peminjam Buku</h4>
 <div class="row">
     <div class="center col s12">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Tambah Peminjam</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahModal" data-whatever="@mdo">Tambah Peminjam</button>
     </div>
 </div>
-<ul class="collection">
+
+<!-- <?php var_dump($home_post) ?> -->
+<table class="table">
+    <tr>
+        <th>id</th>
+        <th>Nama Peminjam</th>
+        <th>Alamat</th>
+        <th>Nama Buku</th>
+        <th>Tanggal Peminjaman</th>
+        <th>File Name</th>
+        <th>Detail</th>
+    </tr>
     <?php foreach ($home_post as $data) : ?>
-        <li class="collection-item avatar">
-            <img src="<?= site_url('upload/post/' . $data['filename']) ?>" class="circle">
-            <p class="title"><?= $data['name']; ?> </p>
-            <small><?= $data['description']; ?> </small>
-            <a href="<?= site_url('welcome/index/' . $data['id']) ?>" class="secondary-content">
-                <i class="material-icons">visibility</i>
-            </a>
-        </li>
+        <tr>
+            <td><?= $data['id']; ?></td>
+            <td><?= $data['nama']; ?></td>
+            <td><?= $data['alamat']; ?></td>
+            <td><?= $data['nama_buku']; ?></td>
+            <td><?= $data['tanggal_pinjam']; ?></td>
+            <td> <img src="<?= site_url('upload/post/' . $data['file_name']) ?>" class="rounded" style="max-width:100px"></td>
+            <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailModal" data-whatever="@mdo">Detail</button>
+            </td>
+        </tr>
     <?php endforeach ?>
-</ul>
+</table>
+
 
 <div class="row">
     <div class="center col s12">
@@ -23,7 +37,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -33,29 +47,68 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="<?= site_url('welcome/tambah'); ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nama" class="col-form-label">Nama Lengkap :</label>
-                        <input type="text" class="form-control" id="nama">
+                        <input type="text" name="nama" class="form-control" id="nama">
                     </div>
                     <div class="form-group">
                         <label for="alamat" class="col-form-label">Alamat :</label>
-                        <textarea class="form-control" id="alamat"></textarea>
+                        <textarea class="form-control" name="alamat" id="alamat"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="nama-buku" class="col-form-label">Nama Buku :</label>
-                        <input type="text" class="form-control" id="nama-buku">
+                        <input type="text" class="form-control" name="nama_buku" id="nama-buku">
                     </div>
                     <div class="form-group">
                         <label for="gambar" class="col-form-label">Foto peminjam:</label>
-                        <input type="file" class="form-control" id="gambar">
+                        <input type="file" name="gambar" class="form-control" id="gambar">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
+                <form action="<?= site_url('welcome/tambah'); ?>" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="nama" class="col-form-label">Nama Lengkap :</label>
+                        <p>Hahahaha</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat" class="col-form-label">Alamat :</label>
+                        <textarea class="form-control" name="alamat" id="alamat"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama-buku" class="col-form-label">Nama Buku :</label>
+                        <input type="text" class="form-control" name="nama_buku" id="nama-buku">
+                    </div>
+                    <div class="form-group">
+                        <label for="gambar" class="col-form-label">Foto peminjam:</label>
+                        <input type="file" name="gambar" class="form-control" id="gambar">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

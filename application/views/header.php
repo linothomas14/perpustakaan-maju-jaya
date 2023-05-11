@@ -19,7 +19,7 @@
     <!-- Image and text -->
     <nav class="navbar navbar-light bg-secondary">
         <a class="navbar-brand" href="#">
-            <img src="./asset/img/logo.jpg" width="30" height="30" class=" d-inline-block align-top" alt="">
+            <img src="<?php echo base_url('asset/img/logo.jpg'); ?>" width="30" height="30" class=" d-inline-block align-top" alt="">
             Perpustakaan Maju Jaya
         </a>
     </nav>

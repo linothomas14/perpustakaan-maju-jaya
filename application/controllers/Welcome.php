@@ -25,14 +25,41 @@ class Welcome extends CI_Controller
 			$this->load->view('footer');
 		}
 	}
+	public function tambah()
+	{
+		$id = uniqid('item', true);
 
+
+		$config['upload_path'] = 'upload/post';
+		$config['allowed_types'] = 'jpg|png|jpeg';
+		$config['max_size'] = '100000';
+		$config['file_ext_tolower'] = true;
+		$config['file_name'] = str_replace('.', '_', $id);
+
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('gambar')) {
+			$this->session->set_flashdata('error', $this->upload->display_errors());
+			redirect('welcome/create');
+		} else {
+
+			$filename = $this->upload->data('file_name');
+
+			$data = array(
+				'nama'  => $this->input->post('nama'),
+				'alamat' => $this->input->post('alamat'),
+				'nama_buku'  => $this->input->post('nama_buku'),
+				'tanggal_pinjam' => date('Y-m-d H:i:s'),
+				'file_name'  => $filename
+			);
+			$this->model->create($data);
+			redirect();
+		}
+	}
 	public function create()
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('name', 'Name', 'required|max_length[30]');
-		$this->form_validation->set_rules('description', 'Description', 'required');
 
 		if ($this->form_validation->run() === false) {
 			$this->load->view('header');
@@ -54,6 +81,7 @@ class Welcome extends CI_Controller
 				$this->session->set_flashdata('error', $this->upload->display_errors());
 				redirect('welcome/create');
 			} else {
+
 				$filename = $this->upload->data('file_name');
 				$this->model->create($id, $filename);
 				redirect();
