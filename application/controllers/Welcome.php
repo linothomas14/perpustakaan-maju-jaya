@@ -93,8 +93,8 @@ class Welcome extends CI_Controller
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('name', 'Name', 'required|max_length[30]');
-		$this->form_validation->set_rules('description', 'Description', 'required');
+		$this->form_validation->set_rules('nama', 'Nama', 'required|max_length[30]');
+		$this->form_validation->set_rules('nama_buku', 'Nama Buku', 'required');
 		$this->form_validation->set_rules('image', 'Image');
 
 		if ($this->form_validation->run() === FALSE) {
@@ -104,17 +104,19 @@ class Welcome extends CI_Controller
 			$this->load->view('footer');
 		} else {
 			if ($this->input->post('file')) {
-				$post = $this->model->read($id);
 
+
+				$file_name = uniqid('item', true);
 				$config['upload_path'] = "upload/post";
 				$config['allowed_types'] = 'jpg|png|jpeg';
 				$config['max_size'] = "100000";
 				$config['file_ext_tolower'] = TRUE;
 				$config['overwrite'] = TRUE;
-				$config['file_name'] = $post->filename;
+				$config['file_name'] = str_replace('.', '_', $file_name);
 
 				$this->load->library('upload', $config);
 
+				$file_name = $this->upload->data('file_name');
 				if (!$this->upload->do_upload('image')) {
 					$config['file_ext_tolower'] = TRUE;
 					$this->session->set_flashdata('error', $this->upload->display_errors());

@@ -21,19 +21,20 @@ class M_welcome extends CI_Model
     public function update($id)
     {
         $data = array(
-            'name' => $this->input->post('name', TRUE),
-            'description' => $this->input->post('description', TRUE),
+            'nama' => $this->input->post('nama', TRUE),
+            'nama_buku' => $this->input->post('nama_buku', TRUE),
+            'alamat' => $this->input->post('alamat', TRUE),
         );
         $this->db->where('id', $id);
-        $this->db->update('post', $data);
+        $this->db->update('peminjam', $data);
     }
     public function delete($id)
     {
         $this->db->where('id', $id);
-        $this->db->delete('post');
+        $this->db->delete('peminjam');
     }
     public function deleteAll()
     {
-        $this->db->empty_table('post');
+        $this->db->empty_table('peminjam');
     }
 }

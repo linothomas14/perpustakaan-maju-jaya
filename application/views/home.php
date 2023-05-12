@@ -24,8 +24,8 @@
             <td><?= $data['nama_buku']; ?></td>
             <td><?= $data['tanggal_pinjam']; ?></td>
             <td> <img src="<?= site_url('upload/post/' . $data['file_name']) ?>" class="rounded" style="max-width:100px"></td>
-            <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailModal" data-whatever="@mdo">Detail</button>
-            </td>
+            <td><a href="<?= site_url('welcome/index/' . $data['id']) ?>" class="secondary-content">
+                    <i class="material-icons">visibility</i></td>
         </tr>
     <?php endforeach ?>
 </table>
