@@ -28,7 +28,7 @@
     <div class="form-group">
       <div class="file-field input-field col s12">
         <div class="btn btn-primary">
-          <input name="image" type="file" id="file">
+          <input name="userfile" type="file" id="file">
         </div>
         <div class="file-path-wrapper">
           <input class="file-path validate" type="text" onchange="thumbnail();" name="file">

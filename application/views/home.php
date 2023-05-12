@@ -5,7 +5,6 @@
     </div>
 </div>
 
-<!-- <?php var_dump($home_post) ?> -->
 <table class="table">
     <tr>
         <th>id</th>
@@ -13,12 +12,14 @@
         <th>Alamat</th>
         <th>Nama Buku</th>
         <th>Tanggal Peminjaman</th>
-        <th>File Name</th>
+        <th>Foto Buku</th>
         <th>Detail</th>
     </tr>
+    <?php $id = 1 ?>
     <?php foreach ($home_post as $data) : ?>
+
         <tr>
-            <td><?= $data['id']; ?></td>
+            <td><?= $id ?></td>
             <td><?= $data['nama']; ?></td>
             <td><?= $data['alamat']; ?></td>
             <td><?= $data['nama_buku']; ?></td>
@@ -27,13 +28,14 @@
             <td><a href="<?= site_url('welcome/index/' . $data['id']) ?>" class="secondary-content">
                     <i class="material-icons">visibility</i></td>
         </tr>
+        <?php $id++ ?>
     <?php endforeach ?>
 </table>
 
 
 <div class="row">
     <div class="center col s12">
-        <a href="<?= site_url('welcome/deleteAll/') ?>" class="btn btn-danger"> Hapus Semua Peminjam </a>
+        <a onclick="alertHapusSemua()" class="btn btn-danger text-white"> Hapus Semua Peminjam </a>
     </div>
 </div>
 
@@ -61,7 +63,7 @@
                         <input type="text" class="form-control" name="nama_buku" id="nama-buku">
                     </div>
                     <div class="form-group">
-                        <label for="gambar" class="col-form-label">Foto peminjam:</label>
+                        <label for="gambar" class="col-form-label">Foto Buku:</label>
                         <input type="file" name="gambar" class="form-control" id="gambar">
                     </div>
                     <div class="modal-footer">
@@ -99,7 +101,7 @@
                         <input type="text" class="form-control" name="nama_buku" id="nama-buku">
                     </div>
                     <div class="form-group">
-                        <label for="gambar" class="col-form-label">Foto peminjam:</label>
+                        <label for="gambar" class="col-form-label">Foto Buku:</label>
                         <input type="file" name="gambar" class="form-control" id="gambar">
                     </div>
                     <div class="modal-footer">
@@ -112,3 +114,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function alertHapusSemua() {
+
+        if (confirm("Apakah anda yakin ?")) {
+            window.location.href = "<?= site_url('welcome/deleteAll/') ?>";
+        }
+
+    }
+</script>

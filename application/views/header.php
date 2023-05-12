@@ -17,10 +17,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <!-- Image and text -->
-    <nav class="navbar navbar-light bg-secondary">
-        <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url('asset/img/logo.jpg'); ?>" width="30" height="30" class=" d-inline-block align-top" alt="">
-            Perpustakaan Maju Jaya
-        </a>
+    <nav class=" bg-info">
+        <img src="<?php echo base_url('asset/img/logo.jpg'); ?>" width="60" height="60" class=" d-inline-block align-top" alt="">
+
+        <a class="font-weight-bold text-white p-5" style="font-size:20px" href="#" class="font-weight-bold">
+            Perpustakaan Maju Jaya</a>
     </nav>
     <main class="container">

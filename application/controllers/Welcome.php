@@ -72,7 +72,7 @@ class Welcome extends CI_Controller
 			$config['upload_path'] = 'upload/post';
 			$config['allowed_types'] = 'jpg|png|jpeg';
 			$config['max_size'] = '100000';
-			$config['file_ext_tolower'] = true;
+			$config['file_ext_tolower'] = TRUE;
 			$config['file_name'] = str_replace('.', '_', $id);
 
 			$this->load->library('upload', $config);
@@ -104,25 +104,23 @@ class Welcome extends CI_Controller
 			$this->load->view('footer');
 		} else {
 			if ($this->input->post('file')) {
-
-
-				$file_name = uniqid('item', true);
+				$post = $this->model->read($id);
 				$config['upload_path'] = "upload/post";
 				$config['allowed_types'] = 'jpg|png|jpeg';
 				$config['max_size'] = "100000";
 				$config['file_ext_tolower'] = TRUE;
 				$config['overwrite'] = TRUE;
-				$config['file_name'] = str_replace('.', '_', $file_name);
+				$config['file_name'] = $post->file_name;
 
 				$this->load->library('upload', $config);
 
-				$file_name = $this->upload->data('file_name');
-				if (!$this->upload->do_upload('image')) {
+				if (!$this->upload->do_upload()) {
 					$config['file_ext_tolower'] = TRUE;
 					$this->session->set_flashdata('error', $this->upload->display_errors());
 					redirect('welcome/update');
 				} else {
 					$this->model->update($id);
+
 					redirect();
 				}
 			} else {
@@ -142,7 +140,6 @@ class Welcome extends CI_Controller
 
 	public function deleteAll()
 	{
-
 		$this->model->deleteAll();
 		redirect('');
 	}
